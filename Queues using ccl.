@@ -1,0 +1,112 @@
+#include<iostream>
+using namespace std;
+class node{
+	public:
+	int data;
+	node *next;
+	node()
+	{
+	data=0;	
+	next=NULL;
+	}
+};
+class circular{
+	public:
+	node* end;
+	void push(int data);
+	void pop();
+	void display(node *temp);
+	circular()
+	{
+	end=NULL;
+	}
+};		
+void circular::display(node *temp)
+{
+	if(temp->next==NULL)
+		cout<<temp->data;
+	else if(temp==NULL)
+		cout<<"It's empty"<<endl;
+	else
+		{
+		cout<<"->";
+		node *slider=temp;
+		node *head=temp->next;
+		slider=slider->next;
+		cout<<head->data<<"->";
+		slider=slider->next;
+		while(slider!=head)
+			{
+			cout<<slider->data<<"->";
+			slider=slider->next;
+			}
+		}
+cout<<endl;
+}
+void circular::push(int number)
+{
+node *temp=new node;
+temp->data=number;
+if(end==NULL)
+	{
+	end=temp;
+	temp->next=temp;
+	}
+else
+	{
+	temp->next=end->next;
+	end->next=temp;
+	}
+}
+void circular::pop()
+{
+	node* slider1=end;
+	while(slider1->next!=end)
+		{
+		slider1=slider1->next;
+		}
+	node *slider2=end;
+	slider1->next=end->next;
+	slider2->next=NULL;
+	end=slider1;
+}
+int main()
+{
+//you can change the names of queues also.
+//circular q;
+//circular temp;
+//circular m;
+//temp=q;
+//q=m;
+//m=temp;
+//q.display(q.end);
+//q.display(q.end);
+int cho=1;
+int number;
+char ch='y';
+while(ch!='n')
+	{
+		cout<<"enter your choice,1-push,2-pop"<<endl;
+		cin>>cho;
+	if(cho==1)
+		{
+		cout<<"Enter the number"<<endl;
+		cin>>number;
+		q.push(number);
+		q.display(q.end);
+		}
+	else if(cho==2) 
+		{
+		q.pop();
+		q.display(q.end);
+		}
+	else
+		{
+		cout<<"Wrong choice";
+		q.display(q.end);
+		}
+	cout<<"yes(y) or no(n)";
+	cin>>ch;
+	}
+return 0;
+}
